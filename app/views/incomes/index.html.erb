@@ -1,0 +1,35 @@
+<h1>Incomes#index</h1>
+  <%= link_to "Register New Income", new_income_path, class:"btn btn-primary" %>
+
+<div class="container">
+
+<%= column_chart Income.group(:category).group_by_month(:date).sum(:amount) %>
+<%= column_chart Income.group_by_month(:date).sum(:amount) %>
+
+<%= line_chart Income.group(:category).group_by_month(:date).sum(:amount) %>
+
+<%= bar_chart Income.group(:category).group_by_month(:date).sum(:amount) %>
+
+</div>
+
+<div class="container">
+ <table class="table">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Amount</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @incomes.each do |income| %>
+      <tr>
+        <td><%= income.category %></td>
+        <td><%= income.amount %></td>
+        <td><%= income.date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+  </div>

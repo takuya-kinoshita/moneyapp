@@ -1,0 +1,27 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body{
+  padding-top: 60px
+}
+
+.table{
+  padding-top: 30px;
+  text-align: center;
+  float: center;
+}
+
+
+
+
+/*header*/
+
+#logo{
+  float: left;
+  margin-right: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-top: 9px;
+  font-size: 2em;
+
+}

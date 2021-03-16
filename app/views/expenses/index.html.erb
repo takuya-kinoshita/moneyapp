@@ -9,10 +9,21 @@
 
 <%= bar_chart Expense.group(:category).group_by_month(:date).sum(:amount) %>
 
+<%= pie_chart Expense.group(:category).sum(:amount) %>
+
 
 </div>
 
 <div class="container">
+<%=form_tag import_expenses_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "import" %>
+<% end %>
+</div>
+
+<div class="container">
+
+
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -25,12 +36,17 @@
   </thead>
 
   <tbody class="center table>
-    <% @expenses.each do |income| %>
+    <% @expenses.each do |expense| %>
       <tr style="word-wrap:break-word;">
-        <td><%= income.category %></td>
-        <td><%= income.amount %></td>
-        <td><%= income.date %></td>
+        <td><%= expense.category %></td>
+        <td><%= expense.amount %></td>
+        <td><%= expense.date %></td>
+        <td><%= link_to "delete", "/expenses/#{expense.id}", method: :delete, data: {confirm: "Are you sure to delete?"}, class:"btn btn-primary" %>
       </tr>
     <% end %>
   </tbody>
-  </div>
+
+
+
+<%= will_paginate %>
+

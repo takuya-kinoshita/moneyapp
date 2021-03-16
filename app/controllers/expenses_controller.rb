@@ -1,6 +1,6 @@
 class ExpensesController < ApplicationController
   def index
-    @expenses = Expense.all
+    @expenses = Expense.paginate(page: params[:page], per_page: 20)
   end
 
   def new
@@ -21,7 +21,18 @@ class ExpensesController < ApplicationController
   def edit
   end
 
+  def destroy
+    @expense = Expense.find(params[:id])
+    if @expense.destroy
+       redirect_to '/expenses'
+    end
+  end
 
+
+  def import
+    Expense.import(params[:file])
+    redirect_to '/expenses'
+  end
 
 
 end

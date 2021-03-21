@@ -1,0 +1,49 @@
+<h1>MonthlyExpenses#index</h1>
+<p>Find me in app/views/monthly_expenses/index.html.erb</p>
+
+ <%= form_for :expenses, method: :post, action: :show do |f| %>
+   <%= f.collection_select :date, @monthly_expenses, :date, :date  %>
+   <%= f.submit "選択", class:"btn btn-primary" %>
+<% end %>
+
+
+<% if @monthly_expense.present? %>
+<h1><%= @monthly_expense.first.date %></h1>
+
+<% @array = [] %>
+<% @monthly_expense.each do |monthly| %>
+  <% @array.push [monthly.category, monthly.amount] %>
+  <% end %>
+
+
+
+<div class="container">
+
+  <%= pie_chart @array %>
+
+</div>
+
+
+<div class="container">
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Category</th>
+      <th>Amount</th>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody class="center table>
+    <% @monthly_expense.each do |expense| %>
+      <tr style="word-wrap:break-word;">
+        <td><%= expense.category %></td>
+        <td><%= expense.amount %></td>
+        <td><%= expense.date %></td>
+        <td><%= link_to "delete", "/expenses/#{expense.id}", method: :delete, data: {confirm: "Are you sure to delete?"}, class:"btn btn-primary" %>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>

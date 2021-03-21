@@ -1,0 +1,7 @@
+<h1>MonthlyExpenses#show</h1>
+<p>Find me in app/views/monthly_expenses/show.html.erb</p>
+
+<% @monthly_expense.each do |monthly| %>
+  <%= monthly.amount %>
+  <%= monthly.date %>
+<% end %>

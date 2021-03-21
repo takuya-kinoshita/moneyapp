@@ -1,13 +1,22 @@
 <h1>Expenses#index</h1>
   <%= link_to "Register New Expense", new_expense_path, class:"btn btn-primary" %>
 
+<%# @monthly_expenses.each do |monthly| %>
+  <h2>
+    <li><%#= link_to monthly, "#" %></li>
+  </h2>
+<%# end %>
+
+
+
+
 
 <div class="container">
-<%= column_chart Expense.group(:category).group_by_month(:date).sum(:amount) %>
+  <h2>月間総支出</h2>
+<%= column_chart Expense.group_by_month(:date).sum(:amount) %>
 
+<h2>項目別支出</h2>
 <%= line_chart Expense.group(:category).group_by_month(:date).sum(:amount) %>
-
-<%= bar_chart Expense.group(:category).group_by_month(:date).sum(:amount) %>
 
 <%= pie_chart Expense.group(:category).sum(:amount) %>
 
@@ -49,4 +58,3 @@
 
 
 <%= will_paginate %>
-
